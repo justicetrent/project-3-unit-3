@@ -6,10 +6,13 @@ $('#title').on('change', function(){         //When the time comes for the user 
    } else { $('#other-title').hide();     // If the user choses any other option on the list, the textbox with the id of other-title does not appear. 
     }
 });
-$('#color').hide();
+$('#colors-js-puns').hide();
 $('#design').on('change', function(){
     if($('#design').val() === 'js puns'){
-        $('#color').eq([1]).show();
+        $('#color').html(`<option value="cornflowerblue">Cornflower Blue (JS Puns shirt only)</option>
+        <option value="darkslategrey">Dark Slate Grey (JS Puns shirt only)</option> 
+        <option value="gold">Gold (JS Puns shirt only)</option>`);
+        $('#colors-js-puns').show();
     }
 });
 //$('#color').hide();
