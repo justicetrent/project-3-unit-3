@@ -13,7 +13,13 @@ $('#design').on('change', function(){
         <option value="darkslategrey">Dark Slate Grey (JS Puns shirt only)</option> 
         <option value="gold">Gold (JS Puns shirt only)</option>`);
         $('#colors-js-puns').show();
-    }
+    } else if ($('#design').val() === "heart js"){
+        $('#color').html(`<option value="tomato">Tomato (I &#9829; JS shirt only)</option>
+        <option value="steelblue">Steel Blue (I &#9829; JS shirt only)</option> 
+        <option value="dimgrey">Dim Grey (I &#9829; JS shirt only)</option>`)
+        $('#colors-js-puns').show(); 
+        
+    } else { $('#colors-js-puns').hide();}
 });
 //$('#color').hide();
 //$('#design').on('change', function(){
