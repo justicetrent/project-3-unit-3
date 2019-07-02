@@ -23,9 +23,9 @@ $('#color').html(`<option value="tomato">Tomato (I &#9829; JS shirt only)</optio
     } else { $('#colors-js-puns').hide();}                                                                                // Hides all of the colors when there is no t-shirt theme selected. 
 });
 
-let totalActivityCost = 0;
-let label = $(`<label>Total: $${totalActivityCost}</label>`);
-$('.activities').append(label);
+let totalActivityCost = 0;                                                                                              // Defined the variable totalActivityCost, and set its value equal to 0.
+let label = $(`<label>Total: $${totalActivityCost}</label>`);                                                          // Defined the variable label, and defined the variable by creating a label element, and using template literal to place the value of the totalActivityCost inside the label element. 
+$('.activities').append(label);                                                                                       // Appended my newly created label elements to an HTML element that holds the class of activities. 
 
 $('[type = "checkbox"]').change((event) => {
      totalActivityCost = 0;
