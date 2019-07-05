@@ -90,27 +90,82 @@ $('#payment').on('change', function () {                                        
     }
 });
 
-// $.validator.addMethod('valueNotEquals', function())function validateForm() {
-//     var x = document.forms['#name']['user_name'].value;
-//     if (x == "") {
-//       alert("Name must be filled out");
-//       return false;
-//     }
-//   }
-
-  //$(document).ready(function() {
-    $('input#name').on('blur', function() {
-        if( $(this).val() == ''  || $(this).val() == "null"){
-            $('#name').prev().text("Please enter a name.").css('color','red')
-            return false;
-        } else { $('#name').prev().text("Name:").css('color','black')
-       return true;
-      }
-    });
-
-
-
-
+    //NAME VALIDATOR
+    // $('input#name').on('blur', function(){ 
+    //     const name = /[A-Za-z]/;
+    //     if($(this).val() == ''  || (name.test($(this).val()) == false)){ 
+    //         $('#name').prev().text("Please enter a valid Name.").css('color','red')
+    //         } else { $('#name').prev().text("Name:").css('color','black')
+    //     }
+    // });
+    //EMAIL VALIDATOR
+    function userName (){
+        const name = /[A-Za-z]/;
+        if(name.test($('#name').val())){
+            $('#name').prev().text("Name:").css('color','black');
+            return true;
+        } else {$('#name').prev().text("Please enter a valid Name.").css('color','red');
+        } }
+        $('input#name').on('blur', (event) => { 
+            userName();
+         });
 
 
+    function userEmail (){
+        const email = /^[A-Za-z]+@[A-Za-z]+.[A-Za-z]+$/;
+        if(email.test($('#mail').val())){
+            $('#mail').prev().text("Email:").css('color','black');
+            return true;
+        } else {$('#mail').prev().text("Please enter a valid Email.").css('color','red');
+        } }
+        $('input#mail').on('blur', (event) => { 
+            userEmail();
+         });
+    
 
+    function userActivity (){
+    if(userActivity.form.checkbox.checked){
+            $('.activities input').prev().text("Register for Activities:").css('color','black');
+           return true;
+        } else {$('.activities').prev().text("Please select at least one Activity").css('color','red');
+        } }
+        $('.activities input').on('change', (event) => { 
+            userActivity();
+        });
+
+ $('.form').on('submit', (e) =>{
+if (userActivity()){
+    return true;
+    } e.preventDefault();
+});
+
+
+
+
+    // ACTIVITY VALIDATOR
+    // if($('.activities').prop() !== 'change'){
+    //     $('.activities').prev().text("Please select at least one activity.").css('color', 'red');
+    //     return false;
+    // } else {$('.activities').prev().text("Register for Activities").css('color','black');
+    //     return true
+    // }
+
+    
+    // $('div.credit-card').on('blur', function() {
+    // const cardNumber = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+    // if($(this).val() == '' || (cardNumber.test($(this).val()) == false)){
+    //     $('.credit-card').prev().text("Please enter a valid Card Number.").css('color','red');
+       
+    // } else {$('.credit-card').prev().text("Card Number:").css('color','black');
+
+//  $('form').on('submit', (e) =>{
+//      if (!!pbValidations()){
+//     return true;
+//  } e.preventDefault();
+// });
+
+
+
+//     const cardNumber = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+//     const zip = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+//     const cvv = /^[0-9]{3,4}$/;
