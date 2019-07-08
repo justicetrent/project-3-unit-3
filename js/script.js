@@ -90,15 +90,11 @@ $('#payment').on('change', function () {                                        
     }
 });
 
-    //NAME VALIDATOR
-    // $('input#name').on('blur', function(){ 
-    //     const name = /[A-Za-z]/;
-    //     if($(this).val() == ''  || (name.test($(this).val()) == false)){ 
-    //         $('#name').prev().text("Please enter a valid Name.").css('color','red')
-    //         } else { $('#name').prev().text("Name:").css('color','black')
-    //     }
-    // });
-    //EMAIL VALIDATOR
+
+
+// VALIDATOR SECTION*****************************************
+
+// NAME VALIDATION
     function userName (){
         const name = /[A-Za-z]/;
         if(name.test($('#name').val())){
@@ -110,62 +106,76 @@ $('#payment').on('change', function () {                                        
             userName();
          });
 
-
+// EMAIL VALIDATION
     function userEmail (){
         const email = /^[A-Za-z]+@[A-Za-z]+.[A-Za-z]+$/;
         if(email.test($('#mail').val())){
             $('#mail').prev().text("Email:").css('color','black');
             return true;
         } else {$('#mail').prev().text("Please enter a valid Email.").css('color','red');
-        } }
+        } 
+    }
         $('input#mail').on('blur', (event) => { 
             userEmail();
          });
     
 
-    function userActivity (){
-    if(userActivity.form.checkbox.checked){
-            $('.activities input').prev().text("Register for Activities:").css('color','black');
-           return true;
-        } else {$('.activities').prev().text("Please select at least one Activity").css('color','red');
-        } }
-        $('.activities input').on('change', (event) => { 
-            userActivity();
-        });
-
- $('.form').on('submit', (e) =>{
-if (userActivity()){
-    return true;
-    } e.preventDefault();
-});
-
-
-
-
-    // ACTIVITY VALIDATOR
-    // if($('.activities').prop() !== 'change'){
-    //     $('.activities').prev().text("Please select at least one activity.").css('color', 'red');
-    //     return false;
-    // } else {$('.activities').prev().text("Register for Activities").css('color','black');
-    //     return true
-    // }
-
+// ACTIVITY VALIDATION
+ function userActivity (){
     
-    // $('div.credit-card').on('blur', function() {
-    // const cardNumber = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-    // if($(this).val() == '' || (cardNumber.test($(this).val()) == false)){
-    //     $('.credit-card').prev().text("Please enter a valid Card Number.").css('color','red');
-       
-    // } else {$('.credit-card').prev().text("Card Number:").css('color','black');
+   if($('input[type="checkbox"]').is(":checked")){
+    
+            $('.activities legend').text("Register for Activities:").css('color','black');
+           return true;
+   }
+            else if($('input[type="checkbox"]').is(":not(:checked)")){
+            $('.activities legend').text("Please select at least one Activity").css('color','red');
+            return false;
+        } 
+    }
+    $('input[type="checkbox"]').on('change', (event) => { 
+        userActivity();
+     });
+   
+// CREDIT CARD PAYMENT VALIDATION
+ function creditCardPayment (){
+        const creditCard = /\d{13,16}$/
+        if(creditCard.test($('#cc-num').val())){
+            $('#cc-num').prev().text("Name:").css('color','black');
+            return true;
+        } else {$('#cc-num').prev().text("Please enter a valid Name.").css('color','red');
+        } }
+        $('#cc-num').on('blur', (event) => { 
+            creditCardPayment();
+         });
 
-//  $('form').on('submit', (e) =>{
-//      if (!!pbValidations()){
-//     return true;
-//  } e.preventDefault();
-// });
+// PROPER ZIP CODE VALIDATION
+function zipCode (){
+        const zipNum = /\d{5}$/
+        if(zipNum.test($('#zip').val())){
+            $('#zip').prev().text("Zip Code:").css('color','black');
+                return true;
+         } else {$('#zip').prev().text("Please enter a valid zip code.").css('color','red');
+         } }
+            $('#zip').on('blur', (event) => { 
+                zipCode();
+             });
 
-
-
-//     const cardNumber = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-//     const zip = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
-//     const cvv = /^[0-9]{3,4}$/;
+// PROPER CVV CODE VALIDATION             
+function cvvCode (){
+        const cvvNum = /\d{3}$/
+        if(cvvNum.test($('#cvv').val())){
+            $('#cvv').prev().text("CVV:").css('color','black');
+                return true;
+        } else {$('#cvv').prev().text("Please enter a valid cvv code.").css('color','red');
+        } }
+             $('#cvv').on('blur', (event) => { 
+            cvvCode();
+         });
+// FINAL CALLING OF ALL FUNCTIONS INTO A FORM FUNCTION 
+     $('form').on('submit', (event) =>{
+       if(userName() & userEmail() & userActivity() & creditCardPayment() & zipCode() & cvvCode()) {
+        
+       } else{ event.preventDefault();
+        }
+    });
