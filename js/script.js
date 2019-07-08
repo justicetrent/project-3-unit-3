@@ -95,18 +95,18 @@ $('#payment').on('change', function () {                                        
 // VALIDATOR SECTION*****************************************
 
 // NAME VALIDATION
-    function userName (){
-        const name = /[A-Za-z]/;
+    function userName (){                                                                                           // Here is the Name validation function 
+        const name = /[A-Za-z]/;                                                                                   // Created a RegEx to test the value of the name that is being entered to exclude numbers and other characters 
         if(name.test($('#name').val())){
-            $('#name').prev().text("Name:").css('color','black');
+            $('#name').prev().text("Name:").css('color','black');                                                // takes the id name (the value that the user entered) if it meets the RegEx standards, the code will run, if not a message will appear to enter a valid name. 
             return true;
         } else {$('#name').prev().text("Please enter a valid Name.").css('color','red');
         } }
         $('input#name').on('blur', (event) => { 
-            userName();
+            userName();                                             // Calls the function for real time data. 
          });
 
-// EMAIL VALIDATION
+// EMAIL VALIDATION                                                                                     // the logic that I used in the Name validatio was mirrored for the Email validation, just using the appropiate id to match the HTML
     function userEmail (){
         const email = /^[A-Za-z]+@[A-Za-z]+.[A-Za-z]+$/;
         if(email.test($('#mail').val())){
@@ -121,11 +121,10 @@ $('#payment').on('change', function () {                                        
     
 
 // ACTIVITY VALIDATION
- function userActivity (){
-    
+ function userActivity (){                                                                                       // is very similar to the Name and Email validations, but uses the is(); method to determine whether at least one of the checkboxes in the list has been checked 
    if($('input[type="checkbox"]').is(":checked")){
     
-            $('.activities legend').text("Register for Activities:").css('color','black');
+            $('.activities legend').text("Register for Activities:").css('color','black');                     // accesses the first child of the legend element (.activities) to change the language Register for Activities title to a error message if a checkbox has not been checked.
            return true;
    }
             else if($('input[type="checkbox"]').is(":not(:checked)")){
@@ -138,7 +137,7 @@ $('#payment').on('change', function () {                                        
      });
    
 // CREDIT CARD PAYMENT VALIDATION
- function creditCardPayment (){
+ function creditCardPayment (){                                                                             // Everything about the credit card payment section, and the zip code, and cvv code validations share the same logic as the name and the email validations, just with the proper id's for the relevent elements. 
         const creditCard = /\d{13,16}$/
         if(creditCard.test($('#cc-num').val())){
             $('#cc-num').prev().text("Name:").css('color','black');
