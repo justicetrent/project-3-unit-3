@@ -182,10 +182,10 @@ function creditCardPayment() {                                                  
     });
     // FINAL CALLING OF ALL FUNCTIONS INTO A FORM FUNCTION 
     $('form').on('submit', (event) => {
-        if ($('#payment').val() === 'credit card'){
+        if ($('#payment').val() === 'credit card'){                                                                     // here I used a set of nested if statements that basically separate my validations to only validate the necessary fields that are necessary for the users preferred method of payment. 
             if (userName() & userEmail() & userActivity() & creditCardPayment() & zipCode() & cvvCode()) {
                 return true
-            } else {event.preventDefault();
+            } else {event.preventDefault(); // if the conditions are not met if the user chosese to pay with a credit card, then the page will not load. 
         }
     }  
         if(($('#payment').val() === 'paypal' || 'bitcoin')){
