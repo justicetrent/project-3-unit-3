@@ -33,7 +33,7 @@ $('.activities').append(label);                                                 
 $('[type = "checkbox"]').change((event) => {                                                                            // Created a change event listener, to listen for the selections the user is clicking on to select activities. 
     totalActivityCost = 0;                                                                                             // I set the totalActivityCost to 0, even after the variable was defined so that its value would display on the page, everytime thereafter, that totalActivityCost is called, its value is updated to hold the cost of the activity. 
     if ($(`input[name='all']`).prop('checked')) {                                                                     // So, totalActivityTotal is just a container that holds costs, and adds those costs together as the user selects activities to participate in.  
-        totalActivityCost += 200;                                                                                           
+        totalActivityCost += 200;
     }
     if ($(`input[name='js-frameworks']`).prop('checked')) {                                                         // Overall, in the Activity Section I just created a series of if statements that simply says that when particular element is selected, then add its price to the totalActivityCost that is displayed in the bottom right corner of that section. 
         $(`input[name='express']`).attr('disabled', true);                                                         // For a few of the elements however, particularly, the (express, and js-frameworks) and (node, and js-lib) activities each have conflicts with their date and time, so eliminate the users confustion about which activities they are able to participate in, and others that have conflicting scheduling, I attached else statements to the original if statements that says that the express activity is selected then disable js-frameworks from the ability to be selected. 
@@ -77,14 +77,14 @@ $('#payment').on('change', function () {                                        
         $('p').hide();
     } else {
         $('#credit-card').hide();
-       
+
     }
-    if (($(this).val() == 'paypal')){
+    if (($(this).val() == 'paypal')) {
         $('p:first').show();
         $('p:last').hide();
 
     }
-    if ($(this).val() == 'bitcoin'){
+    if ($(this).val() == 'bitcoin') {
         $('p:last').show();
         $('p:first').hide();
     }
@@ -95,86 +95,105 @@ $('#payment').on('change', function () {                                        
 // VALIDATOR SECTION*****************************************
 
 // NAME VALIDATION
-    function userName (){                                                                                           // Here is the Name validation function 
-        const name = /[A-Za-z]/;                                                                                   // Created a RegEx to test the value of the name that is being entered to exclude numbers and other characters 
-        if(name.test($('#name').val())){
-            $('#name').prev().text("Name:").css('color','black');                                                // takes the id name (the value that the user entered) if it meets the RegEx standards, the code will run, if not a message will appear to enter a valid name. 
-            return true;
-        } else {$('#name').prev().text("Please enter a valid Name.").css('color','red');
-        } }
-        $('input#name').on('blur', (event) => { 
-            userName();                                             // Calls the function for real time data. 
-         });
+function userName() {                                                                                           // Here is the Name validation function 
+    const name = /[A-Za-z]/;                                                                                   // Created a RegEx to test the value of the name that is being entered to exclude numbers and other characters 
+    if (name.test($('#name').val())) {
+        $('#name').prev().text("Name:").css('color', 'black');                                                // takes the id name (the value that the user entered) if it meets the RegEx standards, the code will run, if not a message will appear to enter a valid name. 
+        return true;
+    } else {
+        $('#name').prev().text("Please enter a valid Name.").css('color', 'red');
+    }
+}
+$('input#name').on('blur', (event) => {
+    userName();                                             // Calls the function for real time data. 
+});
 
 // EMAIL VALIDATION                                                                                     // the logic that I used in the Name validatio was mirrored for the Email validation, just using the appropiate id to match the HTML
-    function userEmail (){
-        const email = /^[A-Za-z]+@[A-Za-z]+.[A-Za-z]+$/;
-        if(email.test($('#mail').val())){
-            $('#mail').prev().text("Email:").css('color','black');
-            return true;
-        } else {$('#mail').prev().text("Please enter a valid Email.").css('color','red');
-        } 
+function userEmail() {
+    const email = /^[A-Za-z]+@[A-Za-z]+.[A-Za-z]+$/;
+    if (email.test($('#mail').val())) {
+        $('#mail').prev().text("Email:").css('color', 'black');
+        return true;
+    } else {
+        $('#mail').prev().text("Please enter a valid Email.").css('color', 'red');
     }
-        $('input#mail').on('blur', (event) => { 
-            userEmail();
-         });
-    
+}
+$('input#mail').on('blur', (event) => {
+    userEmail();
+});
+
 
 // ACTIVITY VALIDATION
- function userActivity (){                                                                                       // is very similar to the Name and Email validations, but uses the is(); method to determine whether at least one of the checkboxes in the list has been checked 
-   if($('input[type="checkbox"]').is(":checked")){
-    
-            $('.activities legend').text("Register for Activities:").css('color','black');                     // accesses the first child of the legend element (.activities) to change the language Register for Activities title to a error message if a checkbox has not been checked.
-           return true;
-   }
-            else if($('input[type="checkbox"]').is(":not(:checked)")){
-            $('.activities legend').text("Please select at least one Activity").css('color','red');
-            return false;
-        } 
+function userActivity() {                                                                                       // is very similar to the Name and Email validations, but uses the is(); method to determine whether at least one of the checkboxes in the list has been checked 
+    if ($('input[type="checkbox"]').is(":checked")) {
+
+        $('.activities legend').text("Register for Activities:").css('color', 'black');                     // accesses the first child of the legend element (.activities) to change the language Register for Activities title to a error message if a checkbox has not been checked.
+        return true;
     }
-    $('input[type="checkbox"]').on('change', (event) => { 
-        userActivity();
-     });
-   
+    else if ($('input[type="checkbox"]').is(":not(:checked)")) {
+        $('.activities legend').text("Please select at least one Activity").css('color', 'red');
+        return false;
+    }
+}
+$('input[type="checkbox"]').on('change', (event) => {
+    userActivity();
+});
+
 // CREDIT CARD PAYMENT VALIDATION
- function creditCardPayment (){                                                                             // Everything about the credit card payment section, and the zip code, and cvv code validations share the same logic as the name and the email validations, just with the proper id's for the relevent elements. 
+function creditCardPayment() {                                                                          // Everything about the credit card payment section, and the zip code, and cvv code validations share the same logic as the name and the email validations, just with the proper id's for the relevent elements. 
         const creditCard = /\d{13,16}$/
-        if(creditCard.test($('#cc-num').val())){
-            $('#cc-num').prev().text("Name:").css('color','black');
+        if (creditCard.test($('#cc-num').val())) {
+            $('#cc-num').prev().text("Name:").css('color', 'black');
             return true;
-        } else {$('#cc-num').prev().text("Please enter a valid Name.").css('color','red');
-        } }
-        $('#cc-num').on('blur', (event) => { 
-            creditCardPayment();
-         });
+        } else {
+            $('#cc-num').prev().text("Please enter a valid Name.").css('color', 'red');
+        }
+    }
+    $('#cc-num').on('blur', (event) => {
+        creditCardPayment();
+    });
 
-// PROPER ZIP CODE VALIDATION
-function zipCode (){
+    // PROPER ZIP CODE VALIDATION
+    function zipCode() {
         const zipNum = /\d{5}$/
-        if(zipNum.test($('#zip').val())){
-            $('#zip').prev().text("Zip Code:").css('color','black');
-                return true;
-         } else {$('#zip').prev().text("Please enter a valid zip code.").css('color','red');
-         } }
-            $('#zip').on('blur', (event) => { 
-                zipCode();
-             });
+        if (zipNum.test($('#zip').val())) {
+            $('#zip').prev().text("Zip Code:").css('color', 'black');
+            return true;
+        } else {
+            $('#zip').prev().text("Please enter a valid zip code.").css('color', 'red');
+        }
+    }
+    $('#zip').on('blur', (event) => {
+        zipCode();
+    });
 
-// PROPER CVV CODE VALIDATION             
-function cvvCode (){
+    // PROPER CVV CODE VALIDATION             
+    function cvvCode() {
         const cvvNum = /\d{3}$/
-        if(cvvNum.test($('#cvv').val())){
-            $('#cvv').prev().text("CVV:").css('color','black');
-                return true;
-        } else {$('#cvv').prev().text("Please enter a valid cvv code.").css('color','red');
-        } }
-             $('#cvv').on('blur', (event) => { 
-            cvvCode();
-         });
-// FINAL CALLING OF ALL FUNCTIONS INTO A FORM FUNCTION 
-     $('form').on('submit', (event) =>{
-       if(userName() & userEmail() & userActivity() & creditCardPayment() & zipCode() & cvvCode()) {
-        
-       } else{ event.preventDefault();
+        if (cvvNum.test($('#cvv').val())) {
+            $('#cvv').prev().text("CVV:").css('color', 'black');
+            return true;
+        } else {
+            $('#cvv').prev().text("Please enter a valid cvv code.").css('color', 'red');
+        }
+    }
+    $('#cvv').on('blur', (event) => {
+        cvvCode();
+    });
+    // FINAL CALLING OF ALL FUNCTIONS INTO A FORM FUNCTION 
+    $('form').on('submit', (event) => {
+        if ($('#payment').val() === 'credit card'){
+            if (userName() & userEmail() & userActivity() & creditCardPayment() & zipCode() & cvvCode()) {
+                return true
+            } else {event.preventDefault();
+        }
+    }  
+        if(($('#payment').val() === 'paypal' || 'bitcoin')){
+            if(userName() & userEmail() & userActivity()){
+                    return true
+                } else { 
+                    event.preventDefault();
+                
+                }
         }
     });
