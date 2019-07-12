@@ -146,7 +146,7 @@ function creditCardPayment() {                                                  
             $('#cc-num').prev().text("Name:").css('color', 'black');
             return true;
         } else {
-            $('#cc-num').prev().text("Please enter a valid Name.").css('color', 'red');
+            $('#cc-num').prev().text("Please enter a valid Card Number.").css('color', 'red');
         }
     }
     $('#cc-num').on('blur', (event) => {
