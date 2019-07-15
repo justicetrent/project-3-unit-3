@@ -141,7 +141,7 @@ $('input[type="checkbox"]').on('change', (event) => {
 
 // CREDIT CARD PAYMENT VALIDATION
 function creditCardPayment() {                                                                          // Everything about the credit card payment section, and the zip code, and cvv code validations share the same logic as the name and the email validations, just with the proper id's for the relevent elements. 
-        const creditCard = /\d{13,16}$/
+        const creditCard = /^\d{13,16}$/
         if (creditCard.test($('#cc-num').val())) {
             $('#cc-num').prev().text("Name:").css('color', 'black');
             return true;
@@ -155,7 +155,7 @@ function creditCardPayment() {                                                  
 
     // PROPER ZIP CODE VALIDATION
     function zipCode() {
-        const zipNum = /\d{5}$/
+        const zipNum = /^\d{5}$/
         if (zipNum.test($('#zip').val())) {
             $('#zip').prev().text("Zip Code:").css('color', 'black');
             return true;
@@ -169,7 +169,7 @@ function creditCardPayment() {                                                  
 
     // PROPER CVV CODE VALIDATION             
     function cvvCode() {
-        const cvvNum = /\d{3}$/
+        const cvvNum = /^\d{3}$/
         if (cvvNum.test($('#cvv').val())) {
             $('#cvv').prev().text("CVV:").css('color', 'black');
             return true;
